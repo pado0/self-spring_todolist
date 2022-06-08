@@ -29,4 +29,9 @@ public class TodoRepository {
         return em.createQuery("select t from Todo t", Todo.class)
                 .getResultList();
     }
+
+    public void deleteOne(Todo todo) {
+        em.remove(todo);
+    }
+
 }
