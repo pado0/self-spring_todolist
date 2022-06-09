@@ -3,6 +3,7 @@ package todolist.todolist.web.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import todolist.todolist.domain.MemberService;
 import todolist.todolist.domain.Todo;
 import todolist.todolist.domain.TodoService;
 
@@ -15,12 +16,23 @@ import java.util.List;
 public class TodoController {
 
     private final TodoService todoService;
+    private final MemberService memberService;
 
 
     // user 정보를 queryparam에서 받아와야하나?
     @PostMapping("/add")
-    public String addTodo(@ModelAttribute Todo todo) {
-        todoService.addItem(todo);
+    public String addTodo(@RequestParam("memberId") Long memberId,
+                          @RequestParam("title") String title,
+                          @RequestParam("context") String context,
+                          @RequestParam("priority") Long priority) {
+
+        Todo todoSet = new Todo();
+        todoSet.setTitle(title);
+        todoSet.setMember(memberService.findMemberById(memberId));
+        todoSet.setContext(context);
+        todoSet.setPriority(priority);
+
+        todoService.addItem(todoSet);
         return "ok";
     }
 

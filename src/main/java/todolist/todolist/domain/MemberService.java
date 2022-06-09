@@ -28,4 +28,8 @@ public class MemberService {
         return memberRepository.findByLoginId(loginId).filter(m -> m.getPassword().equals(password)).orElse(null);
     }
 
+    public Member findMemberById(Long id) {
+        return memberRepository.fineOne(id);
+    }
+
 }

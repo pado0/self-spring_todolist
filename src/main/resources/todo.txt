@@ -1,7 +1,14 @@
-해야할 일 정리
-
-0. put todo 구현하기
-1. member와 todo list 연결하기
+[해야할 일 정리]
+0. put todo 구현하기 > done
+1. member와 todo list 연결하기 > id를 파라미터로 받아옴 done
+- Todo list 조회시 단방향 연관관계 매핑 해둔 member 필드가 제대로 읽어와지지 않는듯
 2. validation
 3. 세션
 4. todo service 필요 없을 것 같으면 제거하기
+5. 테스트코드 짜기
+
+[부족한 점]
+패키지 구조가 정리가 안됨
+spring data jpa를 사용하면 레퍼지토리쪽 깔끔하게 정리할 수 있을듯
+jpa 막상 적용하려니 어느 클래스에서 트랜젝션을 열고, 변경감지 같은걸 처리해야할지 잘 모르겠음
+Entity 객체를 그대로 리턴 / 매개변수에 사용하고있음. 리펙토링시 DTO를 만들어 군더더기 지우
