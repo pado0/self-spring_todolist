@@ -30,8 +30,14 @@ public class TodoRepository {
                 .getResultList();
     }
 
-    public void deleteOne(Todo todo) {
-        em.remove(todo);
+
+    public void deleteOne(Long id) {
+        em.remove(findOne(id));
+    }
+
+    // todo : 쿼리가 하나씩 날리간다는 단점. batch delete로 구현해보자
+    public void deleteAll(){
+        findAll().stream().forEach(t -> em.remove(t));
     }
 
 }

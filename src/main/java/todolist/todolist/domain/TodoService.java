@@ -36,7 +36,12 @@ public class TodoService {
     }
 
     @Transactional
-    public void deleteTodo(Todo todo) {
-        todoRepository.deleteOne(todo);
+    public void deleteTodo(Long id) {
+        todoRepository.deleteOne(id);
+    }
+
+    @Transactional
+    public void deleteAllTodo() {
+        todoRepository.deleteAll();
     }
 }

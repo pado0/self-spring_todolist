@@ -1,0 +1,6 @@
+해야할 일 정리
+
+0. put todo 구현하기
+1. member와 todo list 연결하기
+2. validation
+3. todo service 필요 없을 것 같으면 제거하기

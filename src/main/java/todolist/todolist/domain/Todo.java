@@ -18,7 +18,7 @@ public class Todo {
     private Member member; // member 객체와 단방향 연관관계
 
     private String title;
-    private Long order;
+    private Long priority;
     private boolean completed;
     private String context;
 
