@@ -52,10 +52,8 @@ public class TodoController {
 
     // 수정
     @PutMapping("/{id}")
-    public String updateTodo(@PathVariable Long id){
-        Todo todo = todoService.getTodo(id);
-        System.out.println("todo = " + todo.getId());
-        todoService.updateTodo(todo);
+    public String updateTodo(@PathVariable Long id, @ModelAttribute Todo todo){
+        todoService.updateTodo(todo.getId(), todo.getTitle(), todo.getPriority());
 
         return "ok";
     }

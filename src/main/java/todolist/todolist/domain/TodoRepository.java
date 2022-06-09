@@ -16,14 +16,11 @@ public class TodoRepository {
     public void saveTodo(Todo todo) {
         if(todo.getId() == null) {
             em.persist(todo);
-        }else{
-            System.out.println("todo.getId() = " + todo.getId());
-            em.merge(todo);
-            // em.flush();
-
-            Todo checkTodo = em.find(Todo.class, todo.getId());
-            System.out.println(checkTodo.getId());
         }
+//        }else{
+//            System.out.println("todo.getId() = " + todo.getId());
+//            em.merge(todo);
+//        }
     }
 
     public Todo findOne(Long id) {

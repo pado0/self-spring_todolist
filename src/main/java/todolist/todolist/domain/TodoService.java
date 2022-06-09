@@ -42,10 +42,12 @@ public class TodoService {
     }
 
     @Transactional
-    public void updateTodo(Todo todo){
-        todo.setId(todo.getId());
-        todo.setContext(todo.getContext());
-        todo.setPriority(todo.getPriority());
-        todoRepository.saveTodo(todo);
+    public void updateTodo(Long id, String titie, Long priority) {
+        Todo todoFind = todoRepository.findOne(id);
+
+        // 변경감지
+        todoFind.setPriority(priority);
+        todoFind.setTitle(titie);
+
     }
 }
