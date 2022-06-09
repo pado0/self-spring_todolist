@@ -30,10 +30,6 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
-    @Transactional
-    public void updateTodo(Todo todo) {
-        todoRepository.saveTodo(todo); // repository save todo가 비어있으면 merge
-    }
 
     @Transactional
     public void deleteTodo(Long id) {
@@ -43,5 +39,13 @@ public class TodoService {
     @Transactional
     public void deleteAllTodo() {
         todoRepository.deleteAll();
+    }
+
+    @Transactional
+    public void updateTodo(Todo todo){
+        todo.setId(todo.getId());
+        todo.setContext(todo.getContext());
+        todo.setPriority(todo.getPriority());
+        todoRepository.saveTodo(todo);
     }
 }

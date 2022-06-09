@@ -12,12 +12,17 @@ public class TodoRepository {
 
     private final EntityManager em;
 
-    // 저장
+    // 저장 수정
     public void saveTodo(Todo todo) {
         if(todo.getId() == null) {
             em.persist(todo);
         }else{
+            System.out.println("todo.getId() = " + todo.getId());
             em.merge(todo);
+            // em.flush();
+
+            Todo checkTodo = em.find(Todo.class, todo.getId());
+            System.out.println(checkTodo.getId());
         }
     }
 
@@ -39,5 +44,4 @@ public class TodoRepository {
     public void deleteAll(){
         findAll().stream().forEach(t -> em.remove(t));
     }
-
 }
