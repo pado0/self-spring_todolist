@@ -1,11 +1,14 @@
 package todolist.todolist.config;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 // jwt가  유효한 토큰인지 인증하는 filter. JwtTokenProvider에서 발급한 토큰의 유효성 인증
@@ -23,5 +26,25 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
+        // 요청 헤더에서 파싱한 토큰 읽어오기
+        String token = jwtTokenProvider.resolveToken((HttpServletRequest) request);
+
+        // 토큰유효성, 만료일자 확인
+        if(token != null && jwtTokenProvider.validateToken(token)){
+
+            // jwt 토큰으로 인증정보 조회.
+            Authentication auth = jwtTokenProvider.getAuthentication(token);
+            // 조회한 토큰으로 뭘 하는거지?
+            // security context holder에 대해 알아보자
+            // 시큐리티가 인증한 내용들을 가지고 있으며, Security Context를 포함.
+            // security context를 현재 스레드와 연결해주는 역할.\
+            // 인증된 사용자 정보를 확인할 수 있음
+            // 시큐리티는 스레드 앱 내에서 어디든 security context holder의 인증정보를 확인할 수 있음
+            // 이는 스레드 로컬 덕임. 어디서든 인증정보 확인할 수 있도록 도움.
+            // https://00hongjun.github.io/spring-security/securitycontextholder/
+            SecurityContextHolder.getContext().setAuthentication(auth);
+        }
+
+        chain.doFilter(request, response); // 다음 체인으로 이동
     }
 }
