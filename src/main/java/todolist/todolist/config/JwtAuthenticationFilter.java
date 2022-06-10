@@ -35,13 +35,6 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             // jwt 토큰으로 인증정보 조회.
             Authentication auth = jwtTokenProvider.getAuthentication(token);
             // 조회한 토큰으로 뭘 하는거지?
-            // security context holder에 대해 알아보자
-            // 시큐리티가 인증한 내용들을 가지고 있으며, Security Context를 포함.
-            // security context를 현재 스레드와 연결해주는 역할.\
-            // 인증된 사용자 정보를 확인할 수 있음
-            // 시큐리티는 스레드 앱 내에서 어디든 security context holder의 인증정보를 확인할 수 있음
-            // 이는 스레드 로컬 덕임. 어디서든 인증정보 확인할 수 있도록 도움.
-            // https://00hongjun.github.io/spring-security/securitycontextholder/
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
 
