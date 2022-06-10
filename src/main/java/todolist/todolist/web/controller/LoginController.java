@@ -23,11 +23,17 @@ public class LoginController {
 
 
     // todo: 아이디 틀렸을 경우 리턴처리
-    // todo: @Valid로 유효성검사 및 bindingResult
+    // todo: @Valid로 유효성검사 및 bindingResult -> 검증제약조건 걸려니 너무 귀찮
     @PostMapping("/login")
     public String login(@ModelAttribute @Valid Member member, BindingResult bindingResult) {
 
-        List<String> errors = bindingResult.getAllErrors().stream().map(e->e.getDefaultMessage()).collect(Collectors.toList());
+        // List<String> errors = bindingResult.getAllErrors().stream().map(e->e.getDefaultMessage()).collect(Collectors.toList());
+//        if(bindingResult.hasErrors()){
+//            log.info("errors = {}", bindingResult);
+//            return "error";
+//        }
+
+
         log.info("login info : {} {}" , member.getLoginId(), member.getPassword());
         Member loginMember = memberService.login(member.getLoginId(), member.getPassword());
 
